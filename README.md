@@ -55,7 +55,7 @@ The available endpoints are the following (I have tried to use swagger but was u
     "originAccountId": "d0a4ada1-bba5-40b7-99eb-8c7b390a38d5",
     "recipientAccountId": "d0a4ada1-bba5-40b7-99eb-8c7b390a38d5"}
 ```
-        ** Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
+        * Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
 
 * Transfer between accounts:
     * ``POST http://localhost:8080/money-transfer/transfers``.
@@ -94,8 +94,8 @@ The available endpoints are the following (I have tried to use swagger but was u
     "originAccountId": "d0a4ada1-bba5-40b7-99eb-8c7b390a38d5",
     "recipientAccountId": "f9261b65-d957-4a78-a4f9-08e6e91f3158"}
 ```
-        ** Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
-        ** Example of error: ``{"message": "Internal Server Error: Account 54a8263a-b71d-422b-b1a4-9d6b006bb845 has unsufficient funds to complete the transfer."}``
+        * Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
+        * Example of error: ``{"message": "Internal Server Error: Account 54a8263a-b71d-422b-b1a4-9d6b006bb845 has unsufficient funds to complete the transfer."}``
 
 
 * Get transactions by account:
@@ -195,7 +195,7 @@ The available endpoints are the following (I have tried to use swagger but was u
 ]
 ```
 
-        ** Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
+        * Example of error: ``{"message": "Internal Server Error: 'INVALID_ACCOUNT_ID' is an invalid account. Please provide a valid account."}``
 
 # Run Tests
 
