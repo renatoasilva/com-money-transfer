@@ -7,7 +7,9 @@ The storage of the accounts is in memory.
 
 # Application
 
-Created using micronaut framework 1.1.3. Configured to run in port 8080, using the url:
+Created using micronaut framework 1.1.3. Uses lombok 1.18.4.
+
+Configured to run on port 8080, using the url:
 
 ```
 http://localhost:8080/money-transfer
