@@ -4,10 +4,7 @@ micronaut:
   server:
     port: 8080
   router:
-    versioning:
-      enabled: true
-      default-version: 1
-  static-resources:
-    swagger:
-      paths: classpath:META-INF/swagger
-      mapping: /swagger/**
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**

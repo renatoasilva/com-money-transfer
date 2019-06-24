@@ -133,8 +133,19 @@ public class TransferServiceImplTest {
 	}
 
 	@Test
-	public void testTopUp() throws Exception {
-		throw new RuntimeException("not yet implemented");
+	public void testTopUp_Success() throws Exception {
+		when(transactionService.addTransaction(VALID_ACCOUNT_1, VALID_ACCOUNT_1,
+				Amount.builder().units(BigDecimal.TEN).build(), Collections.emptyList())).thenReturn(newTransaction);
+
+		Transaction actual = underTest.topUp(VALID_ACCOUNT_1, BigDecimal.TEN);
+		assertThat(actual, is(newTransaction));
+	}
+
+	@Test
+	public void testTopUp_ValidationError_Fails() throws Exception {
+		when(accountService.getAccountBalance(INVALID_ACCOUNT_ID)).thenThrow(new AccountNotFoundException(INVALID_ACCOUNT_ID));
+
+		Assertions.assertThrows(AccountNotFoundException.class, () -> underTest.topUp(INVALID_ACCOUNT_ID, BigDecimal.TEN));
 	}
 
 }
