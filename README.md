@@ -205,15 +205,15 @@ Tests written using Junit 5 and Micronaut tests. To run the tests, run:
 ./mvnw install
 ```
 
-#Standalone run
+# Run Application
 
-Using mvn
+* Using mvn
 
 ```
 ./mvnw exec:exec
 ```
 
-Or using the standard jar:
+* Or using the standard jar:
 
 ```
 ./mvnw package #generates the jar file
