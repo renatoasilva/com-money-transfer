@@ -111,7 +111,7 @@ public class TransferServiceImplTest {
 
 		Assertions.assertThrows(InsufficientFundsException.class, () -> underTest.createTransfer(inputRequest));
 		assertTransaction(INVALID_ACCOUNT_ID, VALID_ACCOUNT_2, Amount.builder().units(inputRequest.getAmount()).build(),
-				"Account INVALID_ACCOUNT_ID has unsufficient funds to complete the transfer.");
+				"Account INVALID_ACCOUNT_ID has insufficient funds to complete the transfer.");
 
 	}
 

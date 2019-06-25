@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -88,12 +89,24 @@ public class TransferControllerTest {
 	}
 
 	@Test
-	public void testCreateTransferRequest_ValidationError() throws Exception {
+	public void testCreateTransferRequest_InsufficientFundsException_Error() throws Exception {
 		when(transferService.createTransfer(any(TransferRequest.class))).thenThrow(new InsufficientFundsException(ACCOUNT_ID));
 		TransferRequest request = TransferRequest.builder()
 				.originAccountId(ACCOUNT_ID)
 				.recipientAccountId(ACCOUNT_ID2)
 				.amount(BigDecimal.TEN)
+				.build();
+
+		Assertions.assertThrows(HttpClientResponseException.class, () -> client.toBlocking()
+				.retrieve(HttpRequest.POST(API_PATH, request), Transaction.class));
+	}
+
+	@Test
+	public void testCreateTransferRequest_NegativeAmount_Error() throws Exception {
+		TransferRequest request = TransferRequest.builder()
+				.originAccountId(ACCOUNT_ID)
+				.recipientAccountId(ACCOUNT_ID2)
+				.amount(BigDecimal.valueOf(-1))
 				.build();
 
 		Assertions.assertThrows(HttpClientResponseException.class, () -> client.toBlocking()
@@ -120,6 +133,13 @@ public class TransferControllerTest {
 
 		Assertions.assertThrows(HttpClientResponseException.class, () -> client.toBlocking()
 				.retrieve(HttpRequest.POST(String.format(API_PATH + "/accounts/%s/amount/%s", ACCOUNT_ID, 10), ""), Transaction.class));
+	}
+
+	@Test
+	public void testTopUp_ZeroAmountError() throws Exception {
+		Assertions.assertThrows(HttpClientResponseException.class, () -> client.toBlocking()
+				.retrieve(HttpRequest.POST(String.format(API_PATH + "/accounts/%s/amount/%s", ACCOUNT_ID, 0), ""), Transaction.class));
+		verifyNoMoreInteractions(transferService);
 	}
 
 }
